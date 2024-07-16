@@ -103,15 +103,40 @@ export default function Home() {
   };
 
   const updateUser = async () => {
+    let editedName = "";
+    let editedEmail = "";
+    let editedRole = "";
+    let editedPassword = "";
+
+    if(fullName == ""){
+      editedName = editData.name
+    } else{
+      editedName = fullName
+    } 
+    if(email == ""){
+      editedEmail = editData.email
+    } else{
+      editedEmail = email
+    } 
+    if(role == ""){
+      editedRole = editData.role
+    } else{
+      editedRole = role
+    } 
+    if(password == ""){
+      editedPassword = editData.password
+    } else{
+      editedPassword = password
+    } 
     try {
       setLoading(true);
       const res = await axios.put(
         `https://caf7193ed9bb0e76469f.free.beeceptor.com/api/users/${editData.id}`,
         {
-          name: fullName,
-          email: email,
-          role: role,
-          password: password,
+          name: editedName,
+          email: editedEmail,
+          role: editedRole,
+          password: editedPassword,
         }
       );
       if (res.status == 200) {
@@ -307,7 +332,7 @@ export default function Home() {
                     </button>
                   </div>
                   <div className="flex flex-col justify-center items-center">
-                    {loading ? (
+                    {tableLoading ? (
                       <RotatingLines
                         visible={true}
                         height="24"
